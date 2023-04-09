@@ -1,0 +1,52 @@
+<?php
+require 'functions.php';
+$mahasiswa = query ("SELECT * FROM mahasiswa");
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin</title>
+        <style>
+            .container{  
+                text-align: right;  
+                border: none;
+                width: 100%;  
+                height: 0;
+            }
+        </style>
+        <div class="container">
+        <a href="tambah.php"><button>Tambah Data Mahasiswa</button></a>
+        </div>
+    </head>
+    <body>
+        <h1 style="text-align:center">Daftar Mahasiswa</h1>
+        <br><br>
+        <table border="1" cellpadding="10" cellspacing="0" align="center">
+            <tr>
+                <th style="text-align:center">No</th>
+                <th style="text-align:center">Foto</th>
+                <th style="text-align:center">Nama</th>
+                <th style="text-align:center">NPM</th>
+                <th style="text-align:center">Jurusan</th>
+                <th style="text-align:center">Email</th>
+                <th style="text-align:center">Edit</th>
+            </tr>
+            <?php $i = 1; ?>
+            <?php foreach($mahasiswa as $row): ?>
+            <tr>
+                <td style="text-align:center"><?= $i; ?></td>
+                <td style="text-align:center"><img src="img/<?= $row["gambar"]?>" width="70" height="70"></td>
+                <td style="text-align:center"><?= $row["nama"]?></td>
+                <td style="text-align:center"><?= $row["npm"]?></td>
+                <td style="text-align:center"><?= $row["jurusan"]?></td>
+                <td style="text-align:center"><?= $row["email"]?></td>
+                <td style="text-align:center">
+                    <a href="ubah.php">ubah</a> | <a href="hapus.php?id=<?= $row["id"]?>" onclick="return confirm('Apakah anda yakin ingin menghapus?');">hapus</a>
+                </td>
+            </tr>
+            <?php $i++; ?>
+            <?php endforeach; ?>
+        </table>
+    </body>
+</html>
